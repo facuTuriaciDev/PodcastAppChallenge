@@ -1,13 +1,7 @@
 import PodcastBox from '../PodcastBox';
+import './PodcastList.css';
 
 const PodcastList = ({filterArray, setFindPodcast}) => {
-
-  const podcastListStyle = {
-      display: 'grid',
-      gridTemplateColumns: 'repeat(auto-fill, minmax(400px, 1fr))',
-      gridGap: '20px',
-      justifyItems: 'center',
-  }
 
   if(filterArray.length === 1){
     return (
@@ -16,8 +10,7 @@ const PodcastList = ({filterArray, setFindPodcast}) => {
   }
 
   return(
-    
-    <div style={podcastListStyle}>
+    <div className='podcastList'>
       {filterArray.map(podcast => 
         <PodcastBox podcast={podcast} key={podcast.id.attributes['im:id']}/>)
       }
