@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import axios from 'axios'
+import { getTopPodcasts }  from './services/podcastCache';
 import PodcastFilter from './components/PodcastFilter';
 import PodcastList from './components/PodcastList';
 
@@ -10,14 +10,12 @@ const App = () => {
   
   const filterArray = findPodcast.length === 0 ? podcasts 
   : podcasts.filter(e=>e["im:name"].label.toLowerCase().includes(findPodcast.toLowerCase()) || e["im:artist"].label.toLowerCase().includes(findPodcast.toLowerCase()))
-  
-  useEffect(() => {
-    axios
-      .get('https://itunes.apple.com/us/rss/toppodcasts/limit=100/genre=1310/json').then(response => {
-        setPodcasts(response.data.feed.entry)
-      })
-  }, [])
 
+  useEffect(() => {
+    getTopPodcasts().then((data) => {
+      setPodcasts(data);
+    });
+  }, []);
   
   const handlefindPodcast = (event) => {
     setfindPodcast(event.target.value)
