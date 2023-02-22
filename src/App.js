@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { getTopPodcasts }  from './services/podcastCache';
+import { getTopPodcasts }  from './services/podcastApi';
 import PodcastFilter from './components/PodcastFilter';
 import PodcastList from './components/PodcastList';
 
