@@ -43,3 +43,13 @@ export async function getPodcastById(podcastId) {
   let getPodcastById = podcasts.find((podcast) => podcast.id.attributes['im:id'] === podcastId);
   return getPodcastById;
 }
+
+export async function getPodcastDetails(podcastId) {
+  try {
+    const response = await axios.get(`https://api.allorigins.win/get?url=${encodeURIComponent(`https://itunes.apple.com/lookup?id=${podcastId}&country=US&media=podcast&entity=podcastEpisode&limit=20`)}`)
+    const episodes = response.data.contents.slice(1); // el primer elemento es la información del podcast
+    return JSON.parse(episodes);
+  } catch (error) {
+    console.error(error);
+  }
+}

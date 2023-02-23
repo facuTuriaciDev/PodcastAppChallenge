@@ -6,7 +6,6 @@ import PodcastList from './components/PodcastList';
 const Home = () => {
   const [podcasts, setPodcasts] = useState([])
   const [findPodcast, setfindPodcast] = useState('')
-
   
   const filterArray = findPodcast.length === 0 ? podcasts 
   : podcasts.filter(e=>e["im:name"].label.toLowerCase().includes(findPodcast.toLowerCase()) || e["im:artist"].label.toLowerCase().includes(findPodcast.toLowerCase()))
