@@ -37,3 +37,9 @@ export async function getTopPodcasts() {
 
   return responseData;
 }
+
+export async function getPodcastById(podcastId) {
+  const podcasts = await getTopPodcasts();
+  let getPodcastById = podcasts.find((podcast) => podcast.id.attributes['im:id'] === podcastId);
+  return getPodcastById;
+}
