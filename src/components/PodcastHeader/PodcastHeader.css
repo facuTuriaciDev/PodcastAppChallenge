@@ -1,0 +1,14 @@
+.app-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 2rem;
+  padding: 0 10px 0 10px;
+  margin: 0 0 40px 0;
+  border-bottom: 3px solid #f0f0f0;
+}
+
+.link {
+  text-decoration: none;
+  color: #4c7eaf;
+}
