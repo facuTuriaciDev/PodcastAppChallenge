@@ -1,55 +1,74 @@
 import axios from "axios";
 
-const API_URL = 'https://itunes.apple.com/us/rss/toppodcasts/limit=100/genre=1310/json';
-const CACHE_KEY = 'topPodcastsCache';
+const TOP_PODCASTS_URL = 'https://itunes.apple.com/us/rss/toppodcasts/limit=100/genre=1310/json';
+const CACHE_KEY_PREFIX = 'podcasts';
+const CACHE_DURATION_MS = 86400000; // 24 hours en milliseconds
 
-export async function getTopPodcasts() {
-  // Clear cache for testing purposes
-  //localStorage.removeItem(CACHE_KEY);
+function getCacheKey(key) {
+  return `${CACHE_KEY_PREFIX}_${key}`;
+}
 
-  const cachedData = localStorage.getItem(CACHE_KEY);
-  const cachedTimestamp = localStorage.getItem(`${CACHE_KEY}_timestamp`);
+function getFromCache(key) {
+  const cachedData = localStorage.getItem(getCacheKey(key));
+  const cachedTimestamp = localStorage.getItem(getCacheKey(`${key}_timestamp`));
   const currentTime = new Date().getTime();
 
-  /*If cache exists and is less than a day old, return cached data
+  if (cachedData && cachedTimestamp && currentTime - cachedTimestamp < CACHE_DURATION_MS) {
+    console.log('Cache hit');
+    return JSON.parse(cachedData);
+  } else {
+    console.log('Cache miss');
+    return null;
+  }
+}
 
-  Change the miliseconds to change the cache time for testing purposes
-  · 86400000 = 24 hours
-  · 5000 miliseconds = 5 seconds
-  */
+function saveToCache(key, data) {
+  localStorage.setItem(getCacheKey(key), JSON.stringify(data));
+  localStorage.setItem(getCacheKey(`${key}_timestamp`), new Date().getTime());
+}
 
-  let cacheExpirationTime = 86400000;
+export async function getTopPodcasts() {
+  const cachedData = getFromCache('top'); //top is just a key
 
-  if (cachedData && cachedTimestamp && currentTime - cachedTimestamp < cacheExpirationTime) {
-    //console.log('cache hit');
-    return JSON.parse(cachedData)
-  } 
+  if (cachedData) {
+    return cachedData;
+  } else {
+    try {
+      const response = await axios.get(TOP_PODCASTS_URL);
+      const responseData = response.data.feed.entry;
+    
+      saveToCache('top', responseData);
+    
+      return responseData;
+    } catch (error) {
+      console.error(error);
+      return null;
+    }
+  }
+}
 
-  //console.log('cache miss');
-  
-  // Fetch data from API if cache is non-existent
-  const response = await axios.get(API_URL);
-  const responseData = response.data.feed.entry;
+export async function getPodcastDetails(podcastId) {
+  const cacheKey = `details_${podcastId}`;
+  const cachedData = getFromCache(cacheKey);
 
-  // Update cache with new data and timestamp
-  localStorage.setItem(CACHE_KEY, JSON.stringify(responseData));
-  localStorage.setItem(`${CACHE_KEY}_timestamp`, currentTime);
-
-  return responseData;
+  if (cachedData) {
+    return JSON.parse(cachedData).results;
+  } else {
+    try {
+      const response = await axios.get(`https://api.allorigins.win/get?url=${encodeURIComponent(`https://itunes.apple.com/lookup?id=${podcastId}&country=US&media=podcast&entity=podcastEpisode&limit=2`)}`); // CROSS_ORIGIN
+      const responseData = response.data.contents;
+    
+      saveToCache(cacheKey, responseData);
+    
+      return JSON.parse(responseData).results;
+    } catch (error) {
+      console.error(error);
+      return null;
+    }
+  }
 }
 
 export async function getPodcastById(podcastId) {
   const podcasts = await getTopPodcasts();
-  let getPodcastById = podcasts.find((podcast) => podcast.id.attributes['im:id'] === podcastId);
-  return getPodcastById;
-}
-
-export async function getPodcastDetails(podcastId) {
-  try {
-    const response = await axios.get(`https://api.allorigins.win/get?url=${encodeURIComponent(`https://itunes.apple.com/lookup?id=${podcastId}&country=US&media=podcast&entity=podcastEpisode&limit=20`)}`)
-    const episodes = response.data.contents.slice(1); // el primer elemento es la información del podcast
-    return JSON.parse(episodes);
-  } catch (error) {
-    console.error(error);
-  }
+  return podcasts.find(podcast => podcast.id.attributes['im:id'] === podcastId) || null;
 }

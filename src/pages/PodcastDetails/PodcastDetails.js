@@ -25,11 +25,11 @@ const PodcastDetails = () => {
   if (!podcast || !podcastDetails) {
     return <div>Loading...</div>;
   }
-  
+
   return (
     <div className={'container'}>
       <div className={'container-left'}>
-        <PodcastCard podcast={podcast}/>
+        <PodcastCard podcast={podcast} />
       </div>
       <div className={'container-right'}>
         <PodcastEpisodesList podcast={podcastDetails} />
