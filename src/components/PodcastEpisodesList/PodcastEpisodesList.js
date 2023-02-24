@@ -1,4 +1,5 @@
 import './PodcastEpisodesList.css';
+import { Link } from 'react-router-dom';
 
 const PodcastEpisodesList = ({ podcast }) => {
 
@@ -6,7 +7,9 @@ const PodcastEpisodesList = ({ podcast }) => {
     return <div>Loading...</div>;
   }
 
-  const episodes = podcast;
+  const episodes = podcast.slice(1);
+
+  const COLLECTION_ID = episodes[0].collectionId;
 
   function formatTime(milliseconds) {
     const totalSeconds = Math.floor(milliseconds / 1000);
@@ -31,9 +34,13 @@ const PodcastEpisodesList = ({ podcast }) => {
           </div>
           {episodes.map((episode) => (
             <div key={episode.trackId} className={'episode'}>
+
               <div className={'episodeTitle'}>
-                <p>{episode.trackName}</p>
+                <Link key={episode.trackId} to={`/podcast/${COLLECTION_ID}/episode/${episode.trackId}`}>
+                  <p>{episode.trackName}</p>
+                </Link>  
               </div>
+
               <div className={'episodeDetails'}>
                 <p>{new Date(episode.releaseDate).toLocaleDateString()}</p>
               </div>
