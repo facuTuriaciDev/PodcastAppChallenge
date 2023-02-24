@@ -2,14 +2,7 @@ import PodcastBox from '../PodcastBox';
 import './PodcastList.css';
 import { Link } from 'react-router-dom';
 
-const PodcastList = ({filterArray, setFindPodcast}) => {
-
-  if(filterArray.length === 1){
-    return (
-      <PodcastBox podcast={filterArray[0]} />
-    )
-  }
-
+const PodcastList = ({filterArray}) => {
   return(
     <div className='podcastList'>
         {filterArray.map(podcast => (

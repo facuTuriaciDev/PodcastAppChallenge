@@ -1,14 +1,10 @@
 import './PodcastEpisodesList.css';
 
 const PodcastEpisodesList = ({ podcast }) => {
-  //const episodes = podcast['im:item'];
 
   if (!podcast) {
     return <div>Loading...</div>;
   }
-
-
-  console.log(podcast);
 
   const episodes = podcast;
 

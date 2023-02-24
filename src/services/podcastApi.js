@@ -14,10 +14,10 @@ function getFromCache(key) {
   const currentTime = new Date().getTime();
 
   if (cachedData && cachedTimestamp && currentTime - cachedTimestamp < CACHE_DURATION_MS) {
-    console.log('Cache hit');
+    //console.log('Cache hit');
     return JSON.parse(cachedData);
   } else {
-    console.log('Cache miss');
+    //console.log('Cache miss');
     return null;
   }
 }
