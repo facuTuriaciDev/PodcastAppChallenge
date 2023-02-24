@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect} from 'react'
 import { getTopPodcasts } from '../../services/podcastApi'
 import PodcastFilter from '../../components/PodcastFilter'
 import PodcastList from '../../components/PodcastList';
@@ -13,6 +13,8 @@ const Home = () => {
   useEffect(() => {
     getTopPodcasts().then((data) => {
       setPodcasts(data);
+    }).catch(error => {
+      console.error(error);
     });
   }, []);
 

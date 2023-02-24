@@ -55,7 +55,7 @@ export async function getPodcastDetails(podcastId) {
     return JSON.parse(cachedData).results;
   } else {
     try {
-      const response = await axios.get(`https://api.allorigins.win/get?url=${encodeURIComponent(`https://itunes.apple.com/lookup?id=${podcastId}&country=US&media=podcast&entity=podcastEpisode&limit=2`)}`); // CROSS_ORIGIN
+      const response = await axios.get(`https://api.allorigins.win/get?url=${encodeURIComponent(`https://itunes.apple.com/lookup?id=${podcastId}&country=US&media=podcast&entity=podcastEpisode&limit=20`)}`); // CROSS_ORIGIN
       const responseData = response.data.contents;
     
       saveToCache(cacheKey, responseData);
