@@ -1,31 +1,14 @@
-import { useState, useEffect, useContext } from 'react';
 import { useParams } from 'react-router-dom';
-import { getPodcastById, getPodcastDetails } from '../../services/podcastApi';
 import PodcastCard from '../../components/PodcastCard';
 import PodcastEpisodesList from '../../components/PodcastEpisodesList';
 import './PodcastDetails.css';
-import SpinnerContext from '../../components/SpinnerContext';
-
+import useGetPodcastById from '../../hooks/useGetPodcastById';
+import useGetPodcastDetails from '../../hooks/useGetPodcastDetails';
 
 const PodcastDetails = () => {
-  const { setLoading } = useContext(SpinnerContext);
   const { podcastId } = useParams();
-  const [podcast, setPodcast] = useState(null);
-  const [podcastDetails, setPodcastDetails] = useState();
-
-  useEffect(() => {
-    getPodcastById(podcastId).then((data) => {
-      setPodcast(data);
-    });
-  }, [podcastId]);
-
-  useEffect(() => {
-    setLoading(true);
-    getPodcastDetails(podcastId).then((data) => {
-      setPodcastDetails(data);
-      setLoading(false);
-    });
-  }, [podcastId, setLoading]);
+  const { podcast } = useGetPodcastById(podcastId);
+  const { podcastDetails } = useGetPodcastDetails(podcastId);
 
   if (!podcast || !podcastDetails) {
     return <div>Loading...</div>;

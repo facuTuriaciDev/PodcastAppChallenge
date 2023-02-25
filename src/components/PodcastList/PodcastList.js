@@ -9,7 +9,7 @@ const PodcastList = ({filterArray}) => {
         <Link key={podcast.id.attributes['im:id']} to={`/podcast/${podcast.id.attributes['im:id']}`}>
           <PodcastBox podcast={podcast}/>
         </Link>      
-        ))};
+        ))}
     </div>
   )
 }

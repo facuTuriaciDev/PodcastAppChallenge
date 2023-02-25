@@ -7,15 +7,14 @@ import SpinnerContext from '../SpinnerContext';
 const PodcastHeader = () => {
   const { isLoading } = useContext(SpinnerContext);
 
-
   return (
-      <div className="app-header">
-        <Link className='link' to="/">
-          <p>Podcaster</p>
-        </Link>
+    <div className="app-header">
+      <Link className='link' to="/">
+        <p>Podcaster</p>
+      </Link>
 
-        {  isLoading === true && (<BounceLoader size={40} color={'#1d4ad7'}/>) }
-      </div>
+      {isLoading === true && (<BounceLoader size={40} color={'#1d4ad7'} />)}
+    </div>
   );
 };
 

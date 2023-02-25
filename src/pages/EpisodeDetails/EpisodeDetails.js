@@ -1,30 +1,18 @@
-import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { getPodcastById, getPodcastDetails } from '../../services/podcastApi';
 import PodcastCard from '../../components/PodcastCard';
 import PodcastPlayer from '../../components/PodcastPlayer/PodcastPlayer';
 import './EpisodeDetails.css';
+import useGetPodcastById from '../../hooks/useGetPodcastById';
+import useGetPodcastDetails from '../../hooks/useGetPodcastDetails';
 
 const EpisodeDetails = () => {
   const { podcastId } = useParams();
   const { episodeId } = useParams();
 
-  const [podcast, setPodcast] = useState(null);
-  const [podcastDetails, setPodcastDetails] = useState(null);
+  const { podcast } = useGetPodcastById(podcastId);
+  const { podcastDetails, loading } = useGetPodcastDetails(podcastId);
 
-  useEffect(() => {
-    getPodcastById(podcastId).then((data) => {
-      setPodcast(data);
-    });
-  }, [podcastId]);
-
-  useEffect(() => {
-    getPodcastDetails(podcastId).then((data) => {
-      setPodcastDetails(data);
-    });
-  }, [podcastId]);
-
-  if (!podcast || !podcastDetails) {
+  if (!podcast || loading) {
     return <div>Loading...</div>;
   }
 

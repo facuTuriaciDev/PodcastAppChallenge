@@ -1,37 +1,17 @@
-import { useState, useEffect} from 'react'
-import { getTopPodcasts } from '../../services/podcastApi'
-import PodcastFilter from '../../components/PodcastFilter'
+import PodcastFilter from '../../components/PodcastFilter';
 import PodcastList from '../../components/PodcastList';
+import useFilteredPodcasts from '../../hooks/useFilteredPodcasts';
 
 const Home = () => {
-  const [podcasts, setPodcasts] = useState([])
-  const [findPodcast, setfindPodcast] = useState('')
-
-  const filterArray = findPodcast.length === 0 ? podcasts
-    : podcasts.filter(e => e["im:name"].label.toLowerCase().includes(findPodcast.toLowerCase()) || e["im:artist"].label.toLowerCase().includes(findPodcast.toLowerCase()))
-
-  useEffect(() => {
-    getTopPodcasts().then((data) => {
-      setPodcasts(data);
-    }).catch(error => {
-      console.error(error);
-    });
-  }, []);
-
-  const handlefindPodcast = (event) => {
-    setfindPodcast(event.target.value)
-  }
+  const [filteredPodcasts, searchPodcast, handlesearchPodcast] = useFilteredPodcasts();
 
   return (
     <div>
-      <PodcastFilter customText={'Filter podcasts...'} elementFiltered={findPodcast} handle={handlefindPodcast} ElementFilteredCount={filterArray.length} />
+      <PodcastFilter customText={'Filter podcasts...'} elementFiltered={searchPodcast} handle={handlesearchPodcast} ElementFilteredCount={filteredPodcasts.length} />
 
-      {
-        <PodcastList filterArray={filterArray} setfindPodcast={setfindPodcast} />
-      }
-
+      <PodcastList filterArray={filteredPodcasts} setsearchPodcast={handlesearchPodcast} />
     </div>
-  )
-}
+  );
+};
 
-export default Home
+export default Home;
