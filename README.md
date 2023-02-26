@@ -1,70 +1,47 @@
-# Getting Started with Create React App
+# Podcast App Challenge
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Mini-application for listening to iTunes music podcasts consisting of three views:
 
-## Available Scripts
+* Main view
+* Details of a podcast
+* Details of a podcast chapter
 
-In the project directory, you can run:
+## Description of views Scripts
+
+### `Main View`
+URL: /
+
+In the main view, a list of the 100 most popular podcasts according to Apple's list is displayed. The user can filter the podcasts by title or by the name of its author. Clicking on a podcast navigates the user to the detail view of the podcast.
+
+### `Details of a podcast`
+URL: /podcast/{podcastId}
+
+In the detail view of a podcast, a sidebar is displayed with the podcast image, its title, its author, and its description. In the main section, the number of episodes that the podcast currently has is shown, as well as a list of them indicating their title, publication date and duration. Clicking on an episode navigates the user to the detail view of the episode.
+
+### `Details of an episode`
+URL: /podcast/{podcastId}/episode/{episodeId}
+
+In the detail view of an episode, the same sidebar is displayed as in the detail view of the podcast. The main section displays the podcast title, its description, and a basic audio player (HTML5 native) to play the podcast. Episode descriptions that contain HTML are rendered interpreted.
+
+## Scripts
 
 ### `npm start`
+Run the app in development mode at http://localhost:3000
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+### npm `run build`
+Build the application for production in the build folder.
+Optimize the build for best performance.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Resources
+* URL to obtain the list of the 100 most popular podcasts:
+https://itunes.apple.com/us/rss/toppodcasts/limit=100/genre=1310/json
+* Service to be able to access external resources that do not provide JSONP or
+CORS headers: https://api.allorigins.win
+* iTunes API: https://developer.apple.com/library/archive/documentation/AudioVideo/Conceptual/iTuneSearchAPI/LookupExamples.html
 
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## Languages
+* HTML: https://developer.mozilla.org/es/docs/Web/HTML
+* SaSS: https://sass-lang.com/
+* Javascript: https://developer.mozilla.org/es/docs/Web/JavaScript
+* React: https://es.reactjs.org/
+* Axios: https://axios-http.com/es/docs/intro
