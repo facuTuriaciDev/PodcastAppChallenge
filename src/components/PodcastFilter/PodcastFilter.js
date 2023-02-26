@@ -1,4 +1,4 @@
-import "./PodcastFilter.css"
+import "./PodcastFilter.scss"
 
 const PodcastFilter = ({customText, elementFiltered, handle, ElementFilteredCount}) => {
 

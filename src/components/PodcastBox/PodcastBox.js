@@ -1,4 +1,4 @@
-import './PodcastBox.css';
+import './PodcastBox.scss';
 
 const PodcastBox = ({ podcast }) => {
   return (

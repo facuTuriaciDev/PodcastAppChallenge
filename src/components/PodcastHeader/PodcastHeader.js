@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import './PodcastHeader.css';
+import './PodcastHeader.scss';
 import React, { useContext } from 'react';
 import { BounceLoader } from "react-spinners";
 import SpinnerContext from '../SpinnerContext';

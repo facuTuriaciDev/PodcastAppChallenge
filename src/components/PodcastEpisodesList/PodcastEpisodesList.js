@@ -1,4 +1,4 @@
-import './PodcastEpisodesList.css';
+import './PodcastEpisodesList.scss';
 import { Link } from 'react-router-dom';
 
 const PodcastEpisodesList = ({ podcast }) => {

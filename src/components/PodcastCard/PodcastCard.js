@@ -1,4 +1,4 @@
-import './PodcastCard.css';
+import './PodcastCard.scss';
 
 const PodcastCard = ({ podcast }) => {
 

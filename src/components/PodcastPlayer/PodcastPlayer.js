@@ -1,4 +1,4 @@
-import './PodcastPlayer.css';
+import './PodcastPlayer.scss';
 
 const PodcastPlayer = ({ podcast }) => {
 

@@ -1,5 +1,5 @@
 import PodcastBox from '../PodcastBox';
-import './PodcastList.css';
+import './PodcastList.scss';
 import { Link } from 'react-router-dom';
 
 const PodcastList = ({filterArray}) => {
