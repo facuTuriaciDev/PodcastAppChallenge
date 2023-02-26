@@ -1,7 +1,7 @@
 import { useParams } from 'react-router-dom';
 import PodcastCard from '../../components/PodcastCard';
 import PodcastEpisodesList from '../../components/PodcastEpisodesList';
-import './PodcastDetails.css';
+import './PodcastDetails.scss';
 import useGetPodcastById from '../../hooks/useGetPodcastById';
 import useGetPodcastDetails from '../../hooks/useGetPodcastDetails';
 
@@ -11,7 +11,7 @@ const PodcastDetails = () => {
   const { podcastDetails } = useGetPodcastDetails(podcastId);
 
   if (!podcast || !podcastDetails) {
-    return <div>Loading...</div>;
+    return <div></div>;
   }
 
   return (

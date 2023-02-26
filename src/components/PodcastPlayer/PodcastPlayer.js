@@ -1,12 +1,15 @@
 import './PodcastPlayer.scss';
 
 const PodcastPlayer = ({ podcast }) => {
-
   if (!podcast) {
-    return <div>Loading...</div>;
+    return <div></div>;
   }
 
   let episode = podcast;
+  const formattedDescription = podcast.description.replace(
+    /(https?:\/\/[^\s]+)/g,
+    '<a href="$1">$1</a>'
+  );
 
   return (
     <div>
@@ -16,21 +19,19 @@ const PodcastPlayer = ({ podcast }) => {
             <div>{podcast.trackName}</div>
           </div>
 
-          <div>
-            <p />{podcast.description}<p />
+          <div className='episodeDescription'>
+            <p dangerouslySetInnerHTML={{ __html: formattedDescription }} />
           </div>
 
-          <hr className={'podcastPlayer-divider'}></hr>
+          <hr className={'podcastPlayer-divider'} />
 
           <div className={'episode-player'}>
             <audio controls controlsList="nodownload noplaybackrate">
               <source src={episode.previewUrl} type="audio/mpeg" />
             </audio>
           </div>
-
         </div>
       </div>
-
     </div>
   );
 };

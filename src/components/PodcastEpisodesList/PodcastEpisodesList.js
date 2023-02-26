@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 const PodcastEpisodesList = ({ podcast }) => {
 
   if (!podcast) {
-    return <div>Loading...</div>;
+    return <div></div>;
   }
 
   const episodes = podcast.slice(1);
