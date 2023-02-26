@@ -20,31 +20,31 @@ const PodcastEpisodesList = ({ podcast }) => {
 
   return (
     <div>
-      <div className={'episodesListContainer'}>
+      <div className='episodesListContainer'>
 
-        <div className={'header'}>
+        <div className='header'>
           <h3>{`Episodes: ${episodes.length}`}</h3>
         </div>
 
-        <div className={'list'}>
-          <div className={'episode episodeHeader'}>
+        <div className='list'>
+          <div className='episode episodeHeader'>
             <div>Title</div>
             <div>Date</div>
             <div>Duration</div>
           </div>
           {episodes.map((episode) => (
-            <div key={episode.trackId} className={'episode'}>
+            <div key={episode.trackId} className='episode'>
 
-              <div className={'episodeTitle'}>
+              <div className='episodeTitle'>
                 <Link key={episode.trackId} to={`/podcast/${COLLECTION_ID}/episode/${episode.trackId}`}>
                   <p>{episode.trackName}</p>
                 </Link>  
               </div>
 
-              <div className={'episodeDetails'}>
+              <div className='episodeDetails'>
                 <p>{new Date(episode.releaseDate).toLocaleDateString()}</p>
               </div>
-              <div className={'episodeDetails'}>
+              <div className='episodeDetails'>
                 <p>{(formatTime(episode.trackTimeMillis))}</p>
               </div>
             </div>

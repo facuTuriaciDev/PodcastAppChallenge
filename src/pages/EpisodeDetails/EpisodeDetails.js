@@ -21,11 +21,11 @@ const EpisodeDetails = () => {
   });
 
   return (
-    <div className={'container'}>
-      <div className={'container-left'}>
+    <div className='container'>
+      <div className='container-left'>
         <PodcastCard podcast={podcast} />
       </div>
-      <div className={'container-right'}>
+      <div className='container-right'>
         <PodcastPlayer podcast={filterEpisode[0]} />
       </div>
     </div>

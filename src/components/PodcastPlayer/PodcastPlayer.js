@@ -7,15 +7,15 @@ const PodcastPlayer = ({ podcast }) => {
 
   let episode = podcast;
   const formattedDescription = podcast.description.replace(
-    /(https?:\/\/[^\s]+)/g,
-    '<a href="$1">$1</a>'
+    /(https?:\/\/[^\s]+)|(www\.[^\s]+)|(?:[^\s]+\.(?:com|net|org|edu|gov|es|ar))/g,
+    '<a href="$&">$&</a>'
   );
 
   return (
     <div>
-      <div className={'episodesListContainer'}>
-        <div className={'podcastPlayer-list'}>
-          <div className={'episode-title'}>
+      <div className='episodesListContainer'>
+        <div className='podcastPlayer-list'>
+          <div className='episode-title'>
             <div>{podcast.trackName}</div>
           </div>
 
@@ -23,9 +23,9 @@ const PodcastPlayer = ({ podcast }) => {
             <p dangerouslySetInnerHTML={{ __html: formattedDescription }} />
           </div>
 
-          <hr className={'podcastPlayer-divider'} />
+          <hr className='podcastPlayer-divider' />
 
-          <div className={'episode-player'}>
+          <div className='episode-player'>
             <audio controls controlsList="nodownload noplaybackrate">
               <source src={episode.previewUrl} type="audio/mpeg" />
             </audio>

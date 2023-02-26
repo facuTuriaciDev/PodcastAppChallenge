@@ -7,7 +7,7 @@ const Home = () => {
 
   return (
     <div>
-      <PodcastFilter customText={'Filter podcasts...'} elementFiltered={searchPodcast} handle={handlesearchPodcast} ElementFilteredCount={filteredPodcasts.length} />
+      <PodcastFilter customText='Filter podcasts...' elementFiltered={searchPodcast} handle={handlesearchPodcast} ElementFilteredCount={filteredPodcasts.length} />
 
       <PodcastList filterArray={filteredPodcasts} setsearchPodcast={handlesearchPodcast} />
     </div>

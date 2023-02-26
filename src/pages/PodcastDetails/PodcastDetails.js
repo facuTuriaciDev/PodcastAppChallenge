@@ -15,11 +15,11 @@ const PodcastDetails = () => {
   }
 
   return (
-    <div className={'container'}>
-      <div className={'container-left'}>
+    <div className='container'>
+      <div className='container-left'>
         <PodcastCard podcast={podcast} />
       </div>
-      <div className={'container-right'}>
+      <div className='container-right'>
         <PodcastEpisodesList podcast={podcastDetails} />
       </div>
     </div>
